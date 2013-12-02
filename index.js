@@ -24,7 +24,7 @@ LazyStream.prototype._read = function(size) {
     this._factory = null
     this._opts = null
   }
-  stream.on('readable', function() {
+  stream.once('readable', function() {
     self.push(stream.read(size))
   })
 }

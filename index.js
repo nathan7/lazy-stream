@@ -20,6 +20,15 @@ function think(lazy) {
     stream = lazy._stream = new lazy._factory(lazy._opts)
     lazy._factory = null
     lazy._opts = null
+    stream.on('error', function(err) {
+      lazy.emit('error', err)
+    })
+    stream.on('end', function() {
+      lazy.push(null)
+    })
+    stream.on('close', function() {
+      lazy.emit('close')
+    })
   }
   return lazy
 }
